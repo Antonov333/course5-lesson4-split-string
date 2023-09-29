@@ -8,7 +8,7 @@ public class Main {
 
         String inString = "При ответах на технические вопросы сначала проговорите сам вопрос, на который собираетесь отвечать, а после этого озвучьте ответ";
 
-        List<String> stringList = stringDivider(inString, 50);
+        List<String> stringList = stringDivider(inString, 40);
         for (String s : stringList
         ) {
             System.out.println(s);
@@ -21,6 +21,8 @@ public class Main {
         int endOfPart = 0;
         int currentPosition;
         int stringLength = string.length();
+
+        if (string == "" || string == null || lengthOfPart <= 0) {throw new RuntimeException("Wrong Source Data");}
 
         do {
             endOfPart = Integer.min(beginningOfPart + lengthOfPart, stringLength) ;
