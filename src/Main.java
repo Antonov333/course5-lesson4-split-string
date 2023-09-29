@@ -1,34 +1,35 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Hello and welcome!\n\nSolving problem on dividing a String");
+        System.out.println("Hello and welcome!\n\nSolving problem on dividing a String\n");
 
-        /*
-        Problem Solving plan
+        String inString = "При ответах на технические вопросы сначала проговорите сам вопрос, на который собираетесь отвечать, а после этого озвучьте ответ";
 
-        Form of software: single method
-
-        Choose Return type:
-
-        Choose Set of arguments:
-
-        Learn existing libraries possibly useful to solve the problem
-
-         */
-
-
+        List<String> stringList = stringDivider(inString, 50);
+        for (String s : stringList
+        ) {
+            System.out.println(s);
         }
-
-    public String[] stringDivider(String string, int numberOfParts){
-        String[] dividedString = new String[numberOfParts];
-        dividedString[0] = string;
-
-        // First let's create simplest cutting
-
-
-
-        return dividedString;
     }
+
+    public static List<String> stringDivider(String string, int lengthOfPart) {
+        List<String> outSetOfStrings = new ArrayList<>();
+        int nextCharIndex = 0;
+        int endOfPart = 0;
+        do {
+            endOfPart = nextCharIndex + lengthOfPart;
+            if (endOfPart > string.length()) {
+                endOfPart = string.length();
+            }
+            outSetOfStrings.add(string.substring(nextCharIndex, endOfPart));
+            nextCharIndex = nextCharIndex + lengthOfPart;
+        } while (nextCharIndex < string.length());
+
+        return outSetOfStrings;
+    }
+
+
 }
