@@ -17,19 +17,29 @@ public class Main {
 
     public static List<String> stringDivider(String string, int lengthOfPart) {
         List<String> outSetOfStrings = new ArrayList<>();
-        int nextCharIndex = 0;
+        int beginningOfPart = 0;
         int endOfPart = 0;
+        int currentPosition;
+        int stringLength = string.length();
+
         do {
-            endOfPart = nextCharIndex + lengthOfPart;
-            if (endOfPart > string.length()) {
-                endOfPart = string.length();
+            endOfPart = Integer.min(beginningOfPart + lengthOfPart, stringLength) ;
+            currentPosition = endOfPart - 1 ;
+
+            // conditions for adjusting of endOfPart value:
+            // endOfPart < length of string
+            // charAt(endOfPart) is not a white space
+
+            while(!Character.isWhitespace(string.charAt(currentPosition))&currentPosition>=beginningOfPart){
+                currentPosition--;
             }
-            outSetOfStrings.add(string.substring(nextCharIndex, endOfPart));
-            nextCharIndex = nextCharIndex + lengthOfPart;
-        } while (nextCharIndex < string.length());
+            if (currentPosition > beginningOfPart & endOfPart < stringLength){
+                endOfPart = currentPosition + 1;
+            }
+            outSetOfStrings.add(string.substring(beginningOfPart, endOfPart));
+            beginningOfPart = endOfPart;
+        } while (beginningOfPart < stringLength);
 
         return outSetOfStrings;
     }
-
-
 }
