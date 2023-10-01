@@ -6,9 +6,14 @@ public class Main {
 
         System.out.println("Hello and welcome!\n\nSolving problem on dividing a String\n");
 
-        String inString = "При ответах на технические вопросы сначала проговорите сам вопрос, на который собираетесь отвечать, а после этого озвучьте ответ";
+        String inString = "In computer programming, a software framework is an abstraction in which software," +
+                " providing generic functionality, can be selectively changed by additional user-written code, " +
+                "thus providing application-specific software. It provides a standard way to build and deploy " +
+                "applications and is a universal, reusable software environment that provides particular " +
+                "functionality as part of a larger software platform to facilitate the development of software " +
+                "applications, products and solutions.";
 
-        List<String> stringList = stringDivider(inString, 40);
+        List<String> stringList = stringDivider(inString, 65);
         for (String s : stringList
         ) {
             System.out.println(s);
@@ -20,24 +25,32 @@ public class Main {
         int beginningOfPart = 0;
         int endOfPart = 0;
         int currentPosition;
+
+        if (string == null || string.isEmpty() || lengthOfPart <= 0) {
+            throw new RuntimeException("Wrong Source Data");
+        }
+
         int stringLength = string.length();
 
-        if (string == "" || string == null || lengthOfPart <= 0) {throw new RuntimeException("Wrong Source Data");}
-
         do {
-            endOfPart = Integer.min(beginningOfPart + lengthOfPart, stringLength) ;
-            currentPosition = endOfPart - 1 ;
+            endOfPart = Integer.min(beginningOfPart + lengthOfPart, stringLength);
+            currentPosition = endOfPart - 1;
 
             // conditions for adjusting of endOfPart value:
             // endOfPart < length of string
-            // charAt(endOfPart) is not a white space
+            // charAt(endOfPart) is a letter
+            // next char is a letter
 
-            while(!Character.isWhitespace(string.charAt(currentPosition))&currentPosition>=beginningOfPart){
+            while (!Character.isWhitespace(string.charAt(currentPosition))
+                    & currentPosition > beginningOfPart
+                    /*& currentPosition > 0*/)
+            {
                 currentPosition--;
             }
-            if (currentPosition > beginningOfPart & endOfPart < stringLength){
+            if (currentPosition > beginningOfPart & endOfPart < stringLength) {
                 endOfPart = currentPosition + 1;
             }
+
             outSetOfStrings.add(string.substring(beginningOfPart, endOfPart));
             beginningOfPart = endOfPart;
         } while (beginningOfPart < stringLength);
